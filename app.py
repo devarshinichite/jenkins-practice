@@ -16,6 +16,11 @@ def apiKey():
         'name': 'Devarshi Nichite',
         'log': 'Working on Jenkins pipeline',
         'status': 200 
+    },
+    {
+        'name': 'Maharshi Nichite',
+        'log': 'Working on Jenkins pipeline',
+        'status': 200 
     })
 
 if __name__ == '__main__':
