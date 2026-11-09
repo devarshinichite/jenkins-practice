@@ -13,13 +13,13 @@ def home():
 @app.route('/api/data')
 def apiKey():
     return jsonify({
-        'name': 'Devarshi Nichite',
-        'log': 'Working on Jenkins pipeline',
+        'name': 'joe biden',
+        'log': 'soddddaaaa',
         'status': 200 
     },
     {
-        'name': 'Maharshi Nichite',
-        'log': 'Working on Jenkins pipeline',
+        'name': 'doland trump',
+        'log': 'obamnaa',
         'status': 200 
     })
 
