@@ -5,17 +5,6 @@ pipeline{
         TAG = "v${BUILD_NUMBER}"
     }
     stages{
-        stage('Checkout'){
-            steps{
-                echo "Checking out the code from the repository"
-                echo "==============================="
-                
-                git branch: 'main', 
-                credentialsId: 'github-credentials',
-                poll: false,
-                url: 'https://github.com/devarshinichite/jenkins-practice'
-            }
-        }
         stage('Build'){
             steps{
                 echo "Building docker image and pushing it via the pipeline: Phase 1"
