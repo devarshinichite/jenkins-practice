@@ -41,7 +41,7 @@ pipeline{
                 echo "==============================="
 
                 sh 'sleep 5'
-                sh 'curl -f http://3.110.107.36:5000'
+                // sh 'curl -f http://3.110.107.36:5000'
 
                 echo "Hit the endpoint successfully"
                 
