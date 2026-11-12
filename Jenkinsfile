@@ -35,8 +35,8 @@ pipeline{
                 echo "Running the Docker container"
                 echo "==============================="
                 sh 'docker pull "$IMAGE:$TAG"'
-                sh 'docker rm -f flaskappec2-test || true'
-                sh 'docker run -d -p 5000:5000 --name flaskappec2-test "$IMAGE:$TAG"'
+                sh 'docker rm -f flaskappec2test || true'
+                sh 'docker run -d --restart always -p 5000:5000 --name flaskappec2test "$IMAGE:$TAG"'
             }
         }
         stage('Test'){
