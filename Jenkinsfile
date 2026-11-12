@@ -14,7 +14,6 @@ pipeline{
                 sh 'docker build -t "$IMAGE:$TAG" -t "$IMAGE:latest" .'
                 }
             }
-        }
         stage('Push'){
             steps{
                 echo "Pushing Docker image on Docker Hub"
