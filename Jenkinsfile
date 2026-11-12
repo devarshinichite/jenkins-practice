@@ -2,7 +2,7 @@ pipeline{
     agent any
     environment{
         IMAGE = "devarshinichite/myflaskappec2test"
-        TAG = "v${BUILD_NUMBER}-feature/test"
+        TAG = "v${BUILD_NUMBER}-featuretest"
     }
     stages{
         stage('Build'){
