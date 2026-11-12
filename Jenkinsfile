@@ -25,6 +25,7 @@ pipeline{
                 sh 'docker push "$IMAGE:$TAG"'
                 sh 'docker push "$IMAGE:latest"'
             }
+            }
         }
         stage('Deploy'){
             steps{
