@@ -24,7 +24,7 @@ def apiKey():
     })
 
 @app.route('/about')
-def apiKey():
+def about():
     return jsonify({
         'name': 'Devarshi Nichite',
         'working': 'Jenkins Multipipeline Branch',
@@ -34,9 +34,9 @@ def apiKey():
     })
 
 @app.route('/change')
-def apiKey():
+def changes():
     return jsonify({
-        'change': 'only change happen is this one on feature/branch'
+        'change': 'only change happen is this one on feature/branch',
         'visibility': 'if this is visible via pull request/merge request it means changes and pushes on all other files are visiblie excluding the Jenkinsfile in root directory'
     })
 
