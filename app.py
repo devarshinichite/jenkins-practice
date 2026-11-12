@@ -33,5 +33,12 @@ def apiKey():
         'origin': 'main'
     })
 
+@app.route('/change')
+def apiKey():
+    return jsonify({
+        'change': 'only change happen is this one on feature/branch'
+        'visibility': 'if this is visible via pull request/merge request it means changes and pushes on all other files are visiblie excluding the Jenkinsfile in root directory'
+    })
+
 if __name__ == '__main__':
     app.run(port=5000, debug=True, host='0.0.0.0')
