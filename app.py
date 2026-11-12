@@ -23,5 +23,15 @@ def apiKey():
         'status': 200 
     })
 
+@app.route('/about')
+def apiKey():
+    return jsonify({
+        'name': 'Devarshi Nichite',
+        'working': 'Jenkins Multipipeline Branch',
+        'status': 'online',
+        'branch': 'feature/test',
+        'origin': 'main'
+    })
+
 if __name__ == '__main__':
     app.run(port=5000, debug=True, host='0.0.0.0')
