@@ -1,8 +1,8 @@
 pipeline{
     agent any
     environment{
-        IMAGE = "devarshinichite/myflaskappec2"
-        TAG = "v${BUILD_NUMBER}"
+        IMAGE = "devarshinichite/myflaskappec2test"
+        TAG = "v${BUILD_NUMBER}-featuretest"
     }
     stages{
         stage('Build'){
@@ -12,15 +12,19 @@ pipeline{
 
                 echo "Building the Docker image"
                 sh 'docker build -t "$IMAGE:$TAG" -t "$IMAGE:latest" .'
-
-
+                }
+            }
+        stage('Push'){
+            steps{
+                echo "Pushing Docker image on Docker Hub"
+                echo "================================="
                 withCredentials([usernamePassword(credentialsId: 'dockerhub', passwordVariable: 'DOCKERHUB_PWD', usernameVariable: 'DOCKERHUB_USER')]) {
                     sh 'echo "$DOCKERHUB_PWD" | docker login -u "$DOCKERHUB_USER" --password-stdin'
                 
                 echo "Pushing the image to Docker Hub"
                 sh 'docker push "$IMAGE:$TAG"'
                 sh 'docker push "$IMAGE:latest"'
-                }
+            }
             }
         }
         stage('Deploy'){
@@ -31,8 +35,8 @@ pipeline{
                 echo "Running the Docker container"
                 echo "==============================="
                 sh 'docker pull "$IMAGE:$TAG"'
-                sh 'docker rm -f flaskappec2 || true'
-                sh 'docker run -d -p 5000:5000 --name flaskappec2 "$IMAGE:$TAG"'
+                sh 'docker rm -f flaskappec2test || true'
+                sh 'docker run -d -p 5000:5000 --name flaskappec2test "$IMAGE:$TAG"'
             }
         }
         stage('Test'){
@@ -41,7 +45,13 @@ pipeline{
                 echo "==============================="
 
                 sh 'sleep 5'
-                // sh 'curl -f http://3.110.107.36:5000'
+                /* sh 'curl -f http://13.203.193.87:5000'
+
+                sh 'sleep 2'
+                sh 'curl -f http://13.203.193.87:5000/api/data'
+
+                sh 'sleep 2'
+                sh 'curl -f http://13.203.193.87:5000/about' */
 
                 echo "Hit the endpoint successfully"
                 
