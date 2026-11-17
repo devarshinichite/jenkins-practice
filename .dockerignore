@@ -1,2 +1,5 @@
 sonar-project.properties
 requirements-jenkins.txt
+tests
+tests/*
+tests/app_test.py
