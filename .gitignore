@@ -5,3 +5,4 @@ ruff-report.json
 coverage.xml
 .ruff_cache
 .pytest_cache
+venv
