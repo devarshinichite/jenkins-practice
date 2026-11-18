@@ -1,0 +1,95 @@
+pipeline{
+    agent any
+    environment{
+        SONAR_HOST_URL = "http://43.204.219.168:9000/"
+        IMAGE = "generic-app"
+        TAG = "local"
+    }
+    stages{
+        stage('Enviornment'){
+            steps{
+                echo "Setting up Local environment for python."
+                echo "======================================="
+
+                sh 'python3 --version'
+                
+                echo "Creating Virtual environment."
+                echo "======================================="
+
+                sh 'python3 -m venv .venv'
+                sh '. .venv/bin/activate'
+            }
+        }
+        stage('Initial'){
+            steps{
+                echo "Upgrading pip version with latest."
+                echo "======================================="
+
+                sh 'pip install --upgrade pip'
+                
+                echo "Installing python packages and dependencies."
+                echo "======================================="
+
+                sh 'pip install -r requirements-jenkins.txt'
+                sh 'pip install pysonar'
+
+                echo "Checking Package version"
+                echo "======================================="
+
+                sh '''
+                flask --version
+                coverage --version
+                pytest --version
+                pysonar --version
+                '''
+
+                echo "Packages installed successfully"
+            }
+        }
+        stage('Testing'){
+            steps{
+                echo "Unit Testing and Code coverage(coverage.xml)"
+                echo "======================================="
+
+                sh 'python3 -m pytest --cov=app --cov-report=xml'
+                sh 'coverage report -m'
+                sh 'ls -la coverage.xml'
+            }
+        }
+        stage('Sonarqube'){
+            steps{
+                echo "Sending code coverage report to sonarqube via pysonar for analysis."
+                echo "======================================="
+
+                withCredentials([string(credentialsId: 'Sonar-token', variable: 'SONAR_TOKEN')]) {
+                    sh 'pysonar'
+                }
+            }
+        }
+        stage('Build'){
+            steps{
+                echo "Building docker image locally"
+                echo "======================================="
+
+                sh 'docker build -t "$IMAGE:$TAG" .'
+            }
+        }
+        stage('Deploy'){
+            steps{
+                echo "Deploying local build image on docker"
+                echo "======================================="
+
+                sh 'docker rm --force test-app || true'
+                sh 'docker run -d --name test-app -p 5000:5000 "$IMAGE:$TAG"'
+                sh 'docker ps -a'
+                
+                echo "Deployed app container successfully"
+            }
+        }
+    }
+    post{
+        success{echo 'Pipeline Build Successfully.'}
+        failure{echo 'Pipeline Failed! Check for error and issued.'}
+        always{echo 'Pipleine completed'}
+    }
+}

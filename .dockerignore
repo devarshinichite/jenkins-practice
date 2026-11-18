@@ -3,3 +3,5 @@ requirements-jenkins.txt
 tests
 tests/*
 tests/app_test.py
+.git
+Jenkinsfile-test
