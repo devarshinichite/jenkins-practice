@@ -28,9 +28,13 @@ pipeline{
                 .venv/bin/python -m pip install --upgrade pip
                 .venv/bin/python -m pip install -r requirements-jenkins.txt
                 .venv/bin/python -m pip install pysonar
+                
+                echo "Checking package version"
+                echo "======================================="
+                
                 .venv/bin/python -m flask --version
-                .venv/bin/python coverage --version
-                .venv/bin/python pytest --version
+                .venv/bin/python -m coverage --version
+                .venv/bin/python -m pytest --version
                 .venv/bin/pysonar --version
                 '''
 
