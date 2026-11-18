@@ -25,7 +25,7 @@ pipeline{
                 echo "Upgrading pip version with latest."
                 echo "======================================="
 
-                sh 'pip install --upgrade pip'
+                // sh 'pip install --upgrade pip'
                 
                 echo "Installing python packages and dependencies."
                 echo "======================================="
