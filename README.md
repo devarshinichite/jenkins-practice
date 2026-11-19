@@ -18,6 +18,14 @@ CD - Continuous Delivery/Deployment.
 
 In software development, CI/CD is the process of shipping new code and deploying it in a continuous flow. It emphasizes the basics of the SDLC (Software Development Life Cycle), i.e., Testing, Deployment, and Maintenance.
 
+### Delivery vs Deployment?
+
+There isn't any huge difference between either of those. The only difference is in the delivery strategy of software.
+
+In Continuous Delivery - Human intervention is needed, where a Team Lead/Project Manager gives the final green flag after checking all previous workflows and showcasing the product to a client, before giving the final go-ahead to deploy it to production.
+
+Whereas, Deployment doesn't require any human intervention or green flags. It automatically deploys onto a production system after all previous CI/CD workflows and final checks have been successfully completed.
+
 ---
 # Work in Progress
 ## Strategy
