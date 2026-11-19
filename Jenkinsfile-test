@@ -1,7 +1,7 @@
 pipeline{
     agent any
     environment{
-        SONAR_HOST_URL = "http://43.204.219.168:9000/"
+        SONAR_HOST_URL = "http://65.0.125.117:9000/"
         IMAGE = "generic-app"
         TAG = "local"
     }
