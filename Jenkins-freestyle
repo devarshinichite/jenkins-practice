@@ -1,0 +1,58 @@
+ls -la
+
+echo "------------------------"
+echo " Setting up Environment "
+echo "------------------------"
+
+python3 -m venv .venv
+source .venv/bin/activate
+
+echo "-------------------------------------"
+echo " Installing packages and dependencies "
+echo "-------------------------------------"
+
+pip install -r requirements-jenkins.txt
+pip install pysonar
+
+flask --version
+pytest --version
+pysonar --version
+coverage --version
+
+echo "--------------------------------------------"
+echo " Running Pytest and generating coverage.xml"
+echo "--------------------------------------------"
+
+pytest --cov=app --cov-report=xml
+ls -la coverage.xml
+
+echo "-----------------------------------------------"
+echo " Sending code coverage to sonar scanner server "
+echo "-----------------------------------------------"
+
+pysonar
+
+echo "---------------------------------------------------"
+echo " Building docker image & deploying docker container "
+echo "---------------------------------------------------"
+
+docker build -t testapp:local
+docker rm --force pytestapp || true
+docker run -d --name pytestapp -p 5000:5000 testapp:local
+
+echo "---------------------------------------------------"
+echo " Testing endpoints "
+echo "---------------------------------------------------"
+
+curl http://localhost:5000
+curl http://localhost:5000/api/data
+
+echo "---------------------------------"
+echo " Cleaning Jenkins workspace "
+echo "---------------------------------"
+
+rm -fr $WORKSPACE/*
+rm -fr $WORKSPACE/.git
+rm -fr $WORKSPACE/.gitignore
+rm -fr $WORKSPACE/.venv
+rm -fr $WORKSPACE/.env
