@@ -27,6 +27,16 @@ In Continuous Delivery - Human intervention is needed, where a Team Lead/Project
 Whereas, Deployment doesn't require any human intervention or green flags. It automatically deploys onto a production system after all previous CI/CD workflows and final checks have been successfully completed.
 
 ---
+## Technologies, Environment & Tools:
+- AWS EC2 ***(c7i.large)***
+- Python ***(Flask, pysonar, pytest, pytest-cov, coverage.py, unittest)***
+- Jenkins ***(Freestyle, Pipeline & Multi-Pipeline w/PollSCM, Webhooks)***
+- Git, Github
+- SonarQube CE
+- PostgreSQL
+- Docker
+
+---
 # Work in Progress
 ## Strategy
 - Green/Blue
