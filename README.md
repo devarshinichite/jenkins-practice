@@ -34,7 +34,8 @@ Whereas, Deployment doesn't require any human intervention or green flags. It au
 - Git, Github
 - SonarQube CE
 - PostgreSQL
-- Docker
+- Docker (EC2 and Local)
+- GitHub Codespace
 
 ---
 # Work in Progress
